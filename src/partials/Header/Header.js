@@ -12,7 +12,7 @@ const Header = () => {
     const classes = useStyles();
     return (
         <Box className={classes.title}>
-            <AppBar className={classes.navbar}>
+            <AppBar  position="static">
                 <Toolbar>
                     <IconButton
                         size="large"
