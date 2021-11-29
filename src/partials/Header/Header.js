@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { AppBar, Box, Button, Typography, Toolbar, IconButton, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import {useNavigate, Link } from "react-router-dom";
 
-
-import { Menu as MenuIcon } from '@mui/icons-material';
+import { Menu as MenuIcon, Home, PersonAdd } from '@mui/icons-material';
 
 import useStyles from './Header.style';
 
@@ -11,11 +11,13 @@ import useStyles from './Header.style';
 
 const Header = () => {
     const classes = useStyles();
+    const navigate = useNavigate();
 
     const [menuOpen, setMenuOpen] = useState(false)
     const handleToggleMenu=()=>{
         setMenuOpen(!menuOpen)
     }
+    
     return (
         <>
             <Box className={classes.title}>
@@ -40,12 +42,12 @@ const Header = () => {
             </Box>
             <Drawer open={menuOpen} onClose={() => handleToggleMenu()}>
                 <List>
-                    <ListItem>
-                        <ListItemIcon></ListItemIcon>
+                    <ListItem button onClick={()=>{navigate('/'); handleToggleMenu()}}>
+                        <ListItemIcon><Home /></ListItemIcon>
                         <ListItemText>Home</ListItemText>
                     </ListItem>
-                    <ListItem>
-                        <ListItemIcon></ListItemIcon>
+                    <ListItem button onClick={()=>{navigate('/custumers'); handleToggleMenu()}}>
+                        <ListItemIcon><PersonAdd /></ListItemIcon>
                         <ListItemText>Cadastro de Clientes</ListItemText>
                     </ListItem>
                 </List>
