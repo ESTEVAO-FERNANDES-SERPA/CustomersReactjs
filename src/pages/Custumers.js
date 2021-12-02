@@ -9,7 +9,7 @@ const Custumers = () => {
 
     const [custumers, setCustumers] = useState([])
 
-    console.log(custumers)
+    
 
     useEffect(() => {
         axios.get('https://reqres.in/api/users')
@@ -19,6 +19,15 @@ const Custumers = () => {
             })
     }, [])
 
+    const handleRemoveCustomer = (id) => {
+        axios.delete(`https://reqres.in/api/users/${id}`)
+        .then(()=>{
+            const newCustumersState = custumers.filter(custumer => custumer.id !== id)
+
+            setCustumers(newCustumersState)
+        })
+    }
+
     return (
         <>
             
@@ -26,7 +35,7 @@ const Custumers = () => {
             container
             spacing={4}
             direction="row"
-            justifyContent="center"
+            justifyContent="flex-start"
             alignItems="center"
              >
                 {
@@ -34,10 +43,12 @@ const Custumers = () => {
                         return (
                             <Grid item xs={12} sm={6} md={4} >
                                 <CustumerCard
+                                    id={custumer.id}
                                     email={custumer.email}
                                     firstName={custumer.first_name}
                                     lastName={custumer.last_name}
                                     avatar={custumer.avatar}
+                                    onRemoveCustumer={handleRemoveCustomer}
                                 />
                             </Grid>
                         )

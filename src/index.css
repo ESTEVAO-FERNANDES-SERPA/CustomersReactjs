@@ -9,3 +9,10 @@
     
 }
 
+.modalCancel{
+    color: rgb(207, 0, 0) !important;
+}
+
+.modalAgree{
+    color: rgb(0, 92, 0) !important;
+}

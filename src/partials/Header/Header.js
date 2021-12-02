@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { AppBar, Box, Button, Typography, Toolbar, IconButton, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import {useNavigate, Link } from "react-router-dom";
 
-import { Menu as MenuIcon, Home, PersonAdd } from '@mui/icons-material';
+import { Menu as MenuIcon, Home, PersonAdd, Person as PersonIcon } from '@mui/icons-material';
 
 import useStyles from './Header.style';
 
@@ -47,8 +47,12 @@ const Header = () => {
                         <ListItemText>Home</ListItemText>
                     </ListItem>
                     <ListItem button onClick={()=>{navigate('/custumers'); handleToggleMenu()}}>
+                        <ListItemIcon><PersonIcon /></ListItemIcon>
+                        <ListItemText>Consultar Clientes</ListItemText>
+                    </ListItem>
+                    <ListItem button onClick={()=>{navigate('/custumers/add'); handleToggleMenu()}}>
                         <ListItemIcon><PersonAdd /></ListItemIcon>
-                        <ListItemText>Cadastro de Clientes</ListItemText>
+                        <ListItemText>Cadastrar de Clientes</ListItemText>
                     </ListItem>
                 </List>
             </Drawer>

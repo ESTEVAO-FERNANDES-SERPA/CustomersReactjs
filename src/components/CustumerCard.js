@@ -1,35 +1,44 @@
 import * as React from 'react';
 import { useState } from "react";
+
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-
 import CardActions from '@mui/material/CardActions';
-
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-
 import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
+import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+
+import Modal from './ModalConfirm'
 
 
 
 
-const CustumerCard = ({email,
+const CustumerCard = ({
+    id, 
+    email,
     firstName,
     lastName,
-    avatar,}) => {
+    avatar, 
+    onRemoveCustumer}) => {
 
-const [classes, setClasses] = useState()        
-const changeColor = ()=>{
+    const [classes, setClasses] = useState()
+    const [modalOpen, setModalOpen] = useState(false)
     
-    if(classes ==='changeColorHeart'){
-        setClasses('')
-    }else{
-        setClasses('changeColorHeart')
+    
+    const handleToggleModal = () => {
+        setModalOpen(!modalOpen)
     }
-}
+    const handleConfirmModal = (id) => {
+        onRemoveCustumer(id)
+        setModalOpen(!modalOpen)
+    }
+    const handleRemoveCustomer = () => {
+        handleToggleModal()
+    }
+    
     return (
+        <>
         <Card sx={{ maxWidth: 345 }}>
             <CardHeader
                 avatar={
@@ -37,21 +46,25 @@ const changeColor = ()=>{
                         R
                     </Avatar>
                 }
-                
                 title={`${firstName}  ${lastName}`}
                 subheader={email}
             />
-            
             <CardActions disableSpacing>
-                <IconButton onClick={()=>{changeColor()}} aria-label="add to favorites">
-                    <FavoriteIcon  className={classes} />
+                <IconButton  aria-label="add to favorites">
+                    <EditIcon className={classes} />
                 </IconButton>
-                <IconButton aria-label="share">
-                    <ShareIcon />
+                <IconButton onClick={() => handleRemoveCustomer()} aria-label="share">
+                    <DeleteIcon  />
                 </IconButton>
-                
             </CardActions>
         </Card>
+        <Modal 
+        open={modalOpen} 
+        onClose={() => handleToggleModal()}
+        onConfirm={() => handleConfirmModal(id)}
+        title="Deseja Excluir Esse Usuario?"
+        message="Essa ação não pode ser desfeita!"/>
+        </>
     );
 }
 export default CustumerCard
