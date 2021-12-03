@@ -16,3 +16,7 @@
 .modalAgree{
     color: rgb(0, 92, 0) !important;
 }
+
+.progress{
+    max-width: 100px;
+}
