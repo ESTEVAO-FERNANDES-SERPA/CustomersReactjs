@@ -4,7 +4,7 @@ const Home = () => {
     return(
         <>
             
-            <p>batata</p>
+            <p></p>
         </>
     )
 }

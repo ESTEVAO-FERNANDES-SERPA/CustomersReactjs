@@ -3,10 +3,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Box, Grid } from "@mui/material";
-
+import {useNavigate } from "react-router-dom";
 import CustumerCard from "../components/CustumerCard";
 const Custumers = () => {
-
+    const navigate = useNavigate();
     const [custumers, setCustumers] = useState([])
 
     
@@ -26,6 +26,10 @@ const Custumers = () => {
 
             setCustumers(newCustumersState)
         })
+    }
+
+    const handleEditCustomer = id => {
+        navigate(`/custumers/edit${id}`,{ state: { id:id,  } })
     }
 
     return (
@@ -49,6 +53,7 @@ const Custumers = () => {
                                     lastName={custumer.last_name}
                                     avatar={custumer.avatar}
                                     onRemoveCustumer={handleRemoveCustomer}
+                                    onEditCustumer={handleEditCustomer}
                                 />
                             </Grid>
                         )
